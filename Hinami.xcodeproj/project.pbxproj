@@ -1,0 +1,631 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1B9F7AE1274F8B550084C06F /* HinamiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7AE0274F8B550084C06F /* HinamiApp.swift */; };
+		1B9F7AE3274F8B550084C06F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7AE2274F8B550084C06F /* ContentView.swift */; };
+		1B9F7AE5274F8B5E0084C06F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B9F7AE4274F8B5E0084C06F /* Assets.xcassets */; };
+		1B9F7AE8274F8B5E0084C06F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B9F7AE7274F8B5E0084C06F /* Preview Assets.xcassets */; };
+		1B9F7AEA274F8B5E0084C06F /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7AE9274F8B5E0084C06F /* Persistence.swift */; };
+		1B9F7AED274F8B5E0084C06F /* Hinami.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7AEB274F8B5E0084C06F /* Hinami.xcdatamodeld */; };
+		1B9F7AF7274F8B5E0084C06F /* HinamiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7AF6274F8B5E0084C06F /* HinamiTests.swift */; };
+		1B9F7B01274F8B5E0084C06F /* HinamiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B00274F8B5E0084C06F /* HinamiUITests.swift */; };
+		1B9F7B03274F8B5E0084C06F /* HinamiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B02274F8B5E0084C06F /* HinamiUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1B9F7AF3274F8B5E0084C06F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B9F7AD5274F8B550084C06F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B9F7ADC274F8B550084C06F;
+			remoteInfo = Hinami;
+		};
+		1B9F7AFD274F8B5E0084C06F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B9F7AD5274F8B550084C06F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B9F7ADC274F8B550084C06F;
+			remoteInfo = Hinami;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1B9F7ADD274F8B550084C06F /* Hinami.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hinami.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B9F7AE0274F8B550084C06F /* HinamiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HinamiApp.swift; sourceTree = "<group>"; };
+		1B9F7AE2274F8B550084C06F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1B9F7AE4274F8B5E0084C06F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1B9F7AE7274F8B5E0084C06F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1B9F7AE9274F8B5E0084C06F /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		1B9F7AEC274F8B5E0084C06F /* Hinami.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hinami.xcdatamodel; sourceTree = "<group>"; };
+		1B9F7AF2274F8B5E0084C06F /* HinamiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HinamiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B9F7AF6274F8B5E0084C06F /* HinamiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HinamiTests.swift; sourceTree = "<group>"; };
+		1B9F7AFC274F8B5E0084C06F /* HinamiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HinamiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B9F7B00274F8B5E0084C06F /* HinamiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HinamiUITests.swift; sourceTree = "<group>"; };
+		1B9F7B02274F8B5E0084C06F /* HinamiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HinamiUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1B9F7ADA274F8B550084C06F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B9F7AEF274F8B5E0084C06F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B9F7AF9274F8B5E0084C06F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1B9F7AD4274F8B550084C06F = {
+			isa = PBXGroup;
+			children = (
+				1B9F7ADF274F8B550084C06F /* Hinami */,
+				1B9F7AF5274F8B5E0084C06F /* HinamiTests */,
+				1B9F7AFF274F8B5E0084C06F /* HinamiUITests */,
+				1B9F7ADE274F8B550084C06F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1B9F7ADE274F8B550084C06F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1B9F7ADD274F8B550084C06F /* Hinami.app */,
+				1B9F7AF2274F8B5E0084C06F /* HinamiTests.xctest */,
+				1B9F7AFC274F8B5E0084C06F /* HinamiUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1B9F7ADF274F8B550084C06F /* Hinami */ = {
+			isa = PBXGroup;
+			children = (
+				1B9F7AE0274F8B550084C06F /* HinamiApp.swift */,
+				1B9F7AE2274F8B550084C06F /* ContentView.swift */,
+				1B9F7AE4274F8B5E0084C06F /* Assets.xcassets */,
+				1B9F7AE9274F8B5E0084C06F /* Persistence.swift */,
+				1B9F7AEB274F8B5E0084C06F /* Hinami.xcdatamodeld */,
+				1B9F7AE6274F8B5E0084C06F /* Preview Content */,
+			);
+			path = Hinami;
+			sourceTree = "<group>";
+		};
+		1B9F7AE6274F8B5E0084C06F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1B9F7AE7274F8B5E0084C06F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1B9F7AF5274F8B5E0084C06F /* HinamiTests */ = {
+			isa = PBXGroup;
+			children = (
+				1B9F7AF6274F8B5E0084C06F /* HinamiTests.swift */,
+			);
+			path = HinamiTests;
+			sourceTree = "<group>";
+		};
+		1B9F7AFF274F8B5E0084C06F /* HinamiUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1B9F7B00274F8B5E0084C06F /* HinamiUITests.swift */,
+				1B9F7B02274F8B5E0084C06F /* HinamiUITestsLaunchTests.swift */,
+			);
+			path = HinamiUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1B9F7ADC274F8B550084C06F /* Hinami */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B9F7B06274F8B5F0084C06F /* Build configuration list for PBXNativeTarget "Hinami" */;
+			buildPhases = (
+				1B9F7AD9274F8B550084C06F /* Sources */,
+				1B9F7ADA274F8B550084C06F /* Frameworks */,
+				1B9F7ADB274F8B550084C06F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Hinami;
+			productName = Hinami;
+			productReference = 1B9F7ADD274F8B550084C06F /* Hinami.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1B9F7AF1274F8B5E0084C06F /* HinamiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B9F7B09274F8B5F0084C06F /* Build configuration list for PBXNativeTarget "HinamiTests" */;
+			buildPhases = (
+				1B9F7AEE274F8B5E0084C06F /* Sources */,
+				1B9F7AEF274F8B5E0084C06F /* Frameworks */,
+				1B9F7AF0274F8B5E0084C06F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1B9F7AF4274F8B5E0084C06F /* PBXTargetDependency */,
+			);
+			name = HinamiTests;
+			productName = HinamiTests;
+			productReference = 1B9F7AF2274F8B5E0084C06F /* HinamiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1B9F7AFB274F8B5E0084C06F /* HinamiUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B9F7B0C274F8B5F0084C06F /* Build configuration list for PBXNativeTarget "HinamiUITests" */;
+			buildPhases = (
+				1B9F7AF8274F8B5E0084C06F /* Sources */,
+				1B9F7AF9274F8B5E0084C06F /* Frameworks */,
+				1B9F7AFA274F8B5E0084C06F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1B9F7AFE274F8B5E0084C06F /* PBXTargetDependency */,
+			);
+			name = HinamiUITests;
+			productName = HinamiUITests;
+			productReference = 1B9F7AFC274F8B5E0084C06F /* HinamiUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1B9F7AD5274F8B550084C06F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					1B9F7ADC274F8B550084C06F = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					1B9F7AF1274F8B5E0084C06F = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 1B9F7ADC274F8B550084C06F;
+					};
+					1B9F7AFB274F8B5E0084C06F = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 1B9F7ADC274F8B550084C06F;
+					};
+				};
+			};
+			buildConfigurationList = 1B9F7AD8274F8B550084C06F /* Build configuration list for PBXProject "Hinami" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1B9F7AD4274F8B550084C06F;
+			productRefGroup = 1B9F7ADE274F8B550084C06F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1B9F7ADC274F8B550084C06F /* Hinami */,
+				1B9F7AF1274F8B5E0084C06F /* HinamiTests */,
+				1B9F7AFB274F8B5E0084C06F /* HinamiUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1B9F7ADB274F8B550084C06F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B9F7AE8274F8B5E0084C06F /* Preview Assets.xcassets in Resources */,
+				1B9F7AE5274F8B5E0084C06F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B9F7AF0274F8B5E0084C06F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B9F7AFA274F8B5E0084C06F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1B9F7AD9274F8B550084C06F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B9F7AEA274F8B5E0084C06F /* Persistence.swift in Sources */,
+				1B9F7AED274F8B5E0084C06F /* Hinami.xcdatamodeld in Sources */,
+				1B9F7AE3274F8B550084C06F /* ContentView.swift in Sources */,
+				1B9F7AE1274F8B550084C06F /* HinamiApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B9F7AEE274F8B5E0084C06F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B9F7AF7274F8B5E0084C06F /* HinamiTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B9F7AF8274F8B5E0084C06F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B9F7B03274F8B5E0084C06F /* HinamiUITestsLaunchTests.swift in Sources */,
+				1B9F7B01274F8B5E0084C06F /* HinamiUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1B9F7AF4274F8B5E0084C06F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1B9F7ADC274F8B550084C06F /* Hinami */;
+			targetProxy = 1B9F7AF3274F8B5E0084C06F /* PBXContainerItemProxy */;
+		};
+		1B9F7AFE274F8B5E0084C06F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1B9F7ADC274F8B550084C06F /* Hinami */;
+			targetProxy = 1B9F7AFD274F8B5E0084C06F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1B9F7B04274F8B5F0084C06F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1B9F7B05274F8B5F0084C06F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1B9F7B07274F8B5F0084C06F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Hinami/Preview Content\"";
+				DEVELOPMENT_TEAM = T7C88E67XW;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "shiraai-inc.Hinami";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1B9F7B08274F8B5F0084C06F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Hinami/Preview Content\"";
+				DEVELOPMENT_TEAM = T7C88E67XW;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "shiraai-inc.Hinami";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1B9F7B0A274F8B5F0084C06F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T7C88E67XW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "shiraai-inc.HinamiTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hinami.app/Hinami";
+			};
+			name = Debug;
+		};
+		1B9F7B0B274F8B5F0084C06F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T7C88E67XW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "shiraai-inc.HinamiTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hinami.app/Hinami";
+			};
+			name = Release;
+		};
+		1B9F7B0D274F8B5F0084C06F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T7C88E67XW;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "shiraai-inc.HinamiUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Hinami;
+			};
+			name = Debug;
+		};
+		1B9F7B0E274F8B5F0084C06F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T7C88E67XW;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "shiraai-inc.HinamiUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Hinami;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1B9F7AD8274F8B550084C06F /* Build configuration list for PBXProject "Hinami" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B9F7B04274F8B5F0084C06F /* Debug */,
+				1B9F7B05274F8B5F0084C06F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1B9F7B06274F8B5F0084C06F /* Build configuration list for PBXNativeTarget "Hinami" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B9F7B07274F8B5F0084C06F /* Debug */,
+				1B9F7B08274F8B5F0084C06F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1B9F7B09274F8B5F0084C06F /* Build configuration list for PBXNativeTarget "HinamiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B9F7B0A274F8B5F0084C06F /* Debug */,
+				1B9F7B0B274F8B5F0084C06F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1B9F7B0C274F8B5F0084C06F /* Build configuration list for PBXNativeTarget "HinamiUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B9F7B0D274F8B5F0084C06F /* Debug */,
+				1B9F7B0E274F8B5F0084C06F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1B9F7AEB274F8B5E0084C06F /* Hinami.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1B9F7AEC274F8B5E0084C06F /* Hinami.xcdatamodel */,
+			);
+			currentVersion = 1B9F7AEC274F8B5E0084C06F /* Hinami.xcdatamodel */;
+			path = Hinami.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 1B9F7AD5274F8B550084C06F /* Project object */;
+}
