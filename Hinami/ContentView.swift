@@ -8,81 +8,287 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
-    var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
-        }
+/**
+ 時間の情報を管理するための構造体
+ */
+private struct TimeStruct {
+    private var h = 0
+    private var m = 0
+    private var s = 0
+    
+    /**
+     引数で渡した値を時刻情報のプロパティとしてセットする関数
+     */
+    mutating func setTime(h: Int, m: Int, s: Int) {
+        self.h = h
+        self.m = m
+        self.s = s
     }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
+    
+    /**
+     時刻情報のプロパティをリセットする関数
+     */
+    mutating func resetTime() {
+        h = 0
+        m = 0
+        s = 0
     }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
+    
+    /**
+     時刻情報のうち、時間の値をreturnする関数
+     */
+    func getH() -> Int {
+        return h
+    }
+    
+    /**
+     時刻情報のうち、分の値をreturnする関数
+     */
+    func getM() -> Int {
+        return m
+    }
+    
+    /**
+     時刻情報のうち、秒の値をreturnする関数
+     */
+    func getS() -> Int {
+        return s
+    }
+    
+    /**
+     時刻情報を"HH:mm:ss"という文字列としてreturnする
+     */
+    func getTimeStr() -> String {
+        return "\(String(format:"%02d", h)):\(String(format:"%02d", m)):\(String(format:"%02d", s))"
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
+
+struct ContentView: View {
+//    @Environment(\.managedObjectContext) private var viewContext
+    
+    @State private var isPressed = Array(repeating: false, count: 3)
+    @State private var statusController = StatusController(status: .offDuty)
+    @State private var isSettigViewActive = false
+    
+    @AppStorage("restAlertFlag") private var restAlertFlag = false
+    @AppStorage("supplyAlertFlag") private var supplyAlertFlag = false
+    @AppStorage("restInterval") private var restInterval = 45
+    @AppStorage("restTime") private var restTime = 15
+    @AppStorage("supplyInterval") private var supplyInterval = 60
+    
+    @State private var workTime = TimeStruct()
+    @State private var currentTime = TimeStruct()
+    
+    @State private var timerHandler: Timer?
+    
+    @State private var timerStartDate = ""
+    @State private var workTimerStartDate = ""
+    private let dateController = DateController()
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                Image(statusController.getStatusStr())
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 35.0)
+                Text(currentTime.getTimeStr())
+                    .font(Font.custom("Roboto-Light", size: 64.0))
+                GeometryReader { geometry in
+                    VStack() {
+                        
+                        Button(action: {
+                            print(geometry.frame(in:.local).origin
+                            )
+                            print("w:\(geometry.frame(in:.local).width), h:\(geometry.frame(in:.local).height)")
+                            statusController.changeState(buttonNum: 0)
+                            let beforeStatus = statusController.getBeforeStatusType()
+                            switch beforeStatus {
+                            case .offDuty:
+                                startTimer()
+                                break
+                            default:
+                                break
+                            }
+                        }){
+                            Image(statusController.getbutton0ImageName(isPressed: isPressed[0]))
+                                .resizable()
+                                .frame(width:geometry.frame(in:.local).width*0.7,height: geometry.frame(in:.local).width*0.7*(90/315))
+                        }
+                        .pressAction{
+                            isPressed[0]=true
+                        } onRelease: {
+                            isPressed[0]=false
+                        }
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            statusController.changeState(buttonNum: 1)
+                            let beforeStatus = statusController.getBeforeStatusType()
+                            switch beforeStatus {
+                            case .working:
+                                stopTimer()
+                                startTimer()
+                                break
+                            case .takingBreak:
+                                stopTimer()
+                                startTimer()
+                            default:
+                                break
+                            }
+                        }){
+                            Image(statusController.getbutton1ImageName(isPressed: isPressed[1]))
+                                .resizable()
+                                .frame(width:geometry.frame(in:.local).width*0.7,height: geometry.frame(in:.local).width*0.7*(90/315))
+                        }
+                        
+                        .pressAction{
+                            isPressed[1]=true
+                        } onRelease: {
+                            isPressed[1]=false
+                        }
+                        .isInvisible(statusController.getbutton1Flag())
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            statusController.changeState(buttonNum: 2)
+                            let beforeStatus = statusController.getBeforeStatusType()
+                            switch beforeStatus {
+                            case .working:
+                                stopTimer()
+                                break
+                            default:
+                                break
+                            }
+                        }){
+                            Image(statusController.getbutton2ImageName(isPressed: isPressed[2]))
+                                .resizable()
+                                .frame(width:geometry.frame(in:.local).width*0.7,height: geometry.frame(in:.local).width*0.7*(90/315))
+                        }
+                        .pressAction{
+                            isPressed[2]=true
+                        } onRelease: {
+                            isPressed[2]=false
+                        }
+                        .isInvisible(statusController.getbutton2Flag())
+                    }
+                    .frame(width: geometry.frame(in:.local).width, height: geometry.frame(in:.local).width*0.75)
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing){
+                    Button(action: {
+                        self.isSettigViewActive.toggle()
+                    }){
+                        Image("settingIcon")
+                    }.sheet(isPresented: $isSettigViewActive) {
+                        SettingView(
+                            restAlertFlag: $restAlertFlag,
+                            supplyAlertFlag: $supplyAlertFlag,
+                            restInterval: $restInterval,
+                            restTime: $restTime,
+                            supplyInterval: $supplyInterval
+                        )
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     タイマー開始関数
+     
+     ステータスが.takingBreak->.workingの時は以前の続きからカウントを再開
+     */
+    func startTimer() {
+        if let unwrapedTimerHandler = timerHandler {
+            if unwrapedTimerHandler.isValid {
+                return
+            }
+        }
+        
+        let status = statusController.getStatusType()
+        switch status {
+        case .working:
+            print("workTime: \(workTime)")
+            let beforeStatus = statusController.getBeforeStatusType()
+            
+            if (beforeStatus != .takingBreak) {
+                print("off -> working")
+                workTime.resetTime()
+                currentTime.resetTime()
+                timerStartDate = dateController.stringFromDate(date: Date(), format: "yyyy/MM/dd HH:mm:ss")
+            } else {
+                print("rest -> working")
+                let cal = Calendar(identifier: .gregorian)
+                var dateTmp = Date()
+                dateTmp = cal.date(
+                    byAdding: .hour,
+                    value: -workTime.getH(),
+                    to: dateTmp)!
+                dateTmp = cal.date(
+                    byAdding: .minute,
+                    value: -workTime.getM(),
+                    to: dateTmp)!
+                dateTmp = cal.date(
+                    byAdding: .second,
+                    value: -workTime.getS(),
+                    to: dateTmp)!
+                timerStartDate = dateController.stringFromDate(date: dateTmp, format: "yyyy/MM/dd HH:mm:ss")
+                currentTime.resetTime()
+                countTime()
+            }
+            break
+        case .takingBreak:
+            workTime = currentTime
+            currentTime.resetTime()
+            workTimerStartDate = timerStartDate
+            timerStartDate = dateController.stringFromDate(date: Date(), format: "yyyy/MM/dd HH:mm:ss")
+            print(".takingBreak")
+            break
+        default:
+            break
+        }
+        print(timerStartDate)
+        
+        timerHandler = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            //            currentTime.countUpTime()
+            countTime()
+        }
+    }
+    
+    
+    /**
+     タイマー停止関数
+     */
+    private func stopTimer() {
+        timerHandler?.invalidate()
+    }
+    
+    /**
+     タイマーで呼び出して時間をカウントする関数
+     
+     バックグラウンド時の時間も計測するため、Date型の差分を取る
+     */
+    private func countTime(){
+        let start = dateController.dateFromString(string: timerStartDate, format: "yyyy/MM/dd HH:mm:ss")
+        let now = Date()
+        let cal = Calendar(identifier: .gregorian)
+        let diff = cal.dateComponents([.second], from: start, to: now)
+        
+        currentTime.setTime(
+            h: ((diff.second ?? 0)/3600),
+            m: ((diff.second ?? 0)/60%60),
+            s: ((diff.second ?? 0)%60)
+        )
+    }
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView()
     }
 }

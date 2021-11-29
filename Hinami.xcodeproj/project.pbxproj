@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B2B88C8275323CA00876992 /* DateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2B88C7275323CA00876992 /* DateController.swift */; };
 		1B9F7AE1274F8B550084C06F /* HinamiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7AE0274F8B550084C06F /* HinamiApp.swift */; };
 		1B9F7AE3274F8B550084C06F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7AE2274F8B550084C06F /* ContentView.swift */; };
 		1B9F7AE5274F8B5E0084C06F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B9F7AE4274F8B5E0084C06F /* Assets.xcassets */; };
@@ -16,6 +17,24 @@
 		1B9F7AF7274F8B5E0084C06F /* HinamiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7AF6274F8B5E0084C06F /* HinamiTests.swift */; };
 		1B9F7B01274F8B5E0084C06F /* HinamiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B00274F8B5E0084C06F /* HinamiUITests.swift */; };
 		1B9F7B03274F8B5E0084C06F /* HinamiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B02274F8B5E0084C06F /* HinamiUITestsLaunchTests.swift */; };
+		1B9F7B11275114720084C06F /* Roboto-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1B9F7B10275114720084C06F /* Roboto-Light.otf */; };
+		1B9F7B12275114720084C06F /* Roboto-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1B9F7B10275114720084C06F /* Roboto-Light.otf */; };
+		1B9F7B13275114720084C06F /* Roboto-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1B9F7B10275114720084C06F /* Roboto-Light.otf */; };
+		1B9F7B15275132AE0084C06F /* PressActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B14275132AE0084C06F /* PressActions.swift */; };
+		1B9F7B16275132AE0084C06F /* PressActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B14275132AE0084C06F /* PressActions.swift */; };
+		1B9F7B17275132AE0084C06F /* PressActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B14275132AE0084C06F /* PressActions.swift */; };
+		1B9F7B1927514B410084C06F /* Hidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B1827514B410084C06F /* Hidden.swift */; };
+		1B9F7B1A27514B410084C06F /* Hidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B1827514B410084C06F /* Hidden.swift */; };
+		1B9F7B1B27514B420084C06F /* Hidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B1827514B410084C06F /* Hidden.swift */; };
+		1B9F7B1D2751539A0084C06F /* Invisible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B1C2751539A0084C06F /* Invisible.swift */; };
+		1B9F7B1E2751539A0084C06F /* Invisible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B1C2751539A0084C06F /* Invisible.swift */; };
+		1B9F7B1F2751539A0084C06F /* Invisible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B1C2751539A0084C06F /* Invisible.swift */; };
+		1B9F7B212751E1770084C06F /* StatusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B202751E1770084C06F /* StatusController.swift */; };
+		1B9F7B222751E1770084C06F /* StatusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B202751E1770084C06F /* StatusController.swift */; };
+		1B9F7B232751E1770084C06F /* StatusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B202751E1770084C06F /* StatusController.swift */; };
+		1B9F7B252752507A0084C06F /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B242752507A0084C06F /* SettingView.swift */; };
+		1B9F7B262752507A0084C06F /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B242752507A0084C06F /* SettingView.swift */; };
+		1B9F7B272752507A0084C06F /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F7B242752507A0084C06F /* SettingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B2B88C7275323CA00876992 /* DateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateController.swift; sourceTree = "<group>"; };
 		1B9F7ADD274F8B550084C06F /* Hinami.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hinami.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B9F7AE0274F8B550084C06F /* HinamiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HinamiApp.swift; sourceTree = "<group>"; };
 		1B9F7AE2274F8B550084C06F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -48,6 +68,13 @@
 		1B9F7AFC274F8B5E0084C06F /* HinamiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HinamiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B9F7B00274F8B5E0084C06F /* HinamiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HinamiUITests.swift; sourceTree = "<group>"; };
 		1B9F7B02274F8B5E0084C06F /* HinamiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HinamiUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1B9F7B0F275111DB0084C06F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1B9F7B10275114720084C06F /* Roboto-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.otf"; sourceTree = "<group>"; };
+		1B9F7B14275132AE0084C06F /* PressActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressActions.swift; sourceTree = "<group>"; };
+		1B9F7B1827514B410084C06F /* Hidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hidden.swift; sourceTree = "<group>"; };
+		1B9F7B1C2751539A0084C06F /* Invisible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invisible.swift; sourceTree = "<group>"; };
+		1B9F7B202751E1770084C06F /* StatusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusController.swift; sourceTree = "<group>"; };
+		1B9F7B242752507A0084C06F /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,8 +125,16 @@
 		1B9F7ADF274F8B550084C06F /* Hinami */ = {
 			isa = PBXGroup;
 			children = (
+				1B9F7B10275114720084C06F /* Roboto-Light.otf */,
+				1B9F7B0F275111DB0084C06F /* Info.plist */,
 				1B9F7AE0274F8B550084C06F /* HinamiApp.swift */,
 				1B9F7AE2274F8B550084C06F /* ContentView.swift */,
+				1B9F7B242752507A0084C06F /* SettingView.swift */,
+				1B9F7B202751E1770084C06F /* StatusController.swift */,
+				1B2B88C7275323CA00876992 /* DateController.swift */,
+				1B9F7B14275132AE0084C06F /* PressActions.swift */,
+				1B9F7B1827514B410084C06F /* Hidden.swift */,
+				1B9F7B1C2751539A0084C06F /* Invisible.swift */,
 				1B9F7AE4274F8B5E0084C06F /* Assets.xcassets */,
 				1B9F7AE9274F8B5E0084C06F /* Persistence.swift */,
 				1B9F7AEB274F8B5E0084C06F /* Hinami.xcdatamodeld */,
@@ -238,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B9F7AE8274F8B5E0084C06F /* Preview Assets.xcassets in Resources */,
+				1B9F7B11275114720084C06F /* Roboto-Light.otf in Resources */,
 				1B9F7AE5274F8B5E0084C06F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,6 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B9F7B12275114720084C06F /* Roboto-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +290,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B9F7B13275114720084C06F /* Roboto-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,9 +302,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B9F7AEA274F8B5E0084C06F /* Persistence.swift in Sources */,
+				1B9F7B212751E1770084C06F /* StatusController.swift in Sources */,
 				1B9F7AED274F8B5E0084C06F /* Hinami.xcdatamodeld in Sources */,
+				1B2B88C8275323CA00876992 /* DateController.swift in Sources */,
+				1B9F7B252752507A0084C06F /* SettingView.swift in Sources */,
 				1B9F7AE3274F8B550084C06F /* ContentView.swift in Sources */,
+				1B9F7B15275132AE0084C06F /* PressActions.swift in Sources */,
 				1B9F7AE1274F8B550084C06F /* HinamiApp.swift in Sources */,
+				1B9F7B1927514B410084C06F /* Hidden.swift in Sources */,
+				1B9F7B1D2751539A0084C06F /* Invisible.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +319,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B9F7AF7274F8B5E0084C06F /* HinamiTests.swift in Sources */,
+				1B9F7B16275132AE0084C06F /* PressActions.swift in Sources */,
+				1B9F7B1A27514B410084C06F /* Hidden.swift in Sources */,
+				1B9F7B262752507A0084C06F /* SettingView.swift in Sources */,
+				1B9F7B222751E1770084C06F /* StatusController.swift in Sources */,
+				1B9F7B1E2751539A0084C06F /* Invisible.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,7 +332,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B9F7B03274F8B5E0084C06F /* HinamiUITestsLaunchTests.swift in Sources */,
+				1B9F7B232751E1770084C06F /* StatusController.swift in Sources */,
+				1B9F7B17275132AE0084C06F /* PressActions.swift in Sources */,
+				1B9F7B272752507A0084C06F /* SettingView.swift in Sources */,
 				1B9F7B01274F8B5E0084C06F /* HinamiUITests.swift in Sources */,
+				1B9F7B1F2751539A0084C06F /* Invisible.swift in Sources */,
+				1B9F7B1B27514B420084C06F /* Hidden.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,9 +484,11 @@
 				DEVELOPMENT_TEAM = T7C88E67XW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Hinami/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -444,7 +500,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -459,9 +515,11 @@
 				DEVELOPMENT_TEAM = T7C88E67XW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Hinami/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -473,7 +531,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
