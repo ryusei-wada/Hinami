@@ -13,9 +13,12 @@ struct SettingView: View {
     
     @Binding var restAlertFlag: Bool
     @Binding var supplyAlertFlag: Bool
+    @Binding var endOfRestAlertFlag: Bool
     @Binding var restInterval: Int
     @Binding var restTime: Int
     @Binding var supplyInterval: Int
+    @Binding var currentTime: TimeStruct
+    @Binding var statusController: StatusController
     
     var body: some View {
         NavigationView {
@@ -44,7 +47,17 @@ struct SettingView: View {
                         } label: {
                             Text("休憩通知までの時間")
                         }
-                        
+                    }
+                } header: {
+                    Text("休憩通知設定")
+                }
+                
+                Section {
+                    Toggle(isOn: $endOfRestAlertFlag) {
+                        Text("休憩終了通知")
+                    }
+                    
+                    if (endOfRestAlertFlag) {
                         Picker(selection: $restTime) {
                             Text("5 min")
                                 .tag(5)
@@ -66,8 +79,9 @@ struct SettingView: View {
                             Text("休憩終了通知までの時間")
                         }
                     }
+                    
                 } header: {
-                    Text("休憩通知設定")
+                    Text("休憩終了通知設定")
                 }
                 
                 Section {
@@ -92,11 +106,43 @@ struct SettingView: View {
                         }
                     }
                 } header: {
-                    Text("給水通知設定")
+                    Text("給水通知設定（Beta）")
                 }
                 
                 Section{
                     Button(action:{
+                        let currentTimeVal = (currentTime.getH()*60*60)+(currentTime.getM()*60)+(currentTime.getS())
+                        
+                        let status = statusController.getStatusType()
+                        switch status {
+                        case .takingBreak:
+                            if endOfRestAlertFlag {
+                                if currentTimeVal < restTime {
+                                    NotificationController().makeEndOfRestNotification(interval: restTime-currentTimeVal,  labelTime: restTime)
+                                }
+                            }
+                            if supplyAlertFlag {
+                                if currentTimeVal < supplyInterval {
+                                    NotificationController().makeSupplyNotification(interval: supplyInterval-currentTimeVal, labelTime: supplyInterval)
+                                }
+                            }
+                            break
+                        case .working:
+                            if restAlertFlag {
+                                if currentTimeVal < restInterval {
+                                    NotificationController().makeRestNotification(interval: restInterval-currentTimeVal, labelTime: restInterval)
+                                }
+                            }
+                            if supplyAlertFlag {
+                                if currentTimeVal < supplyInterval {
+                                    NotificationController().makeSupplyNotification(interval: supplyInterval-currentTimeVal, labelTime: supplyInterval)
+                                }
+                            }
+                            break
+                        default:
+                            break
+                        }
+                        
                         self.presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("確定")
@@ -113,9 +159,12 @@ struct SettingView_Previews: PreviewProvider {
         SettingView(
             restAlertFlag: .constant(false),
             supplyAlertFlag: .constant(false),
+            endOfRestAlertFlag: .constant(false),
             restInterval: .constant(45),
             restTime: .constant(15),
-            supplyInterval: .constant(60)
+            supplyInterval: .constant(60),
+            currentTime: .constant(TimeStruct()),
+            statusController: .constant(StatusController(status: .offDuty))
         )
     }
 }

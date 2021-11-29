@@ -12,7 +12,7 @@ import CoreData
 /**
  時間の情報を管理するための構造体
  */
-private struct TimeStruct {
+struct TimeStruct {
     private var h = 0
     private var m = 0
     private var s = 0
@@ -107,16 +107,16 @@ struct ContentView: View {
                                 print("off -> working")
                                 startTimer()
                                 if restAlertFlag {
-                                    NotificationController().makeRestNotification(interval: restInterval)
+                                    NotificationController().makeRestNotification(interval: restInterval, labelTime: restInterval)
                                 }
                                 if supplyAlertFlag {
-                                    NotificationController().makeSupplyNotification(interval: supplyInterval)
+                                    NotificationController().makeSupplyNotification(interval: supplyInterval, labelTime: supplyInterval)
                                 }
                                 break
                             default:
                                 print("working/rest -> water")
                                 if supplyAlertFlag {
-                                    NotificationController().makeSupplyNotification(interval: supplyInterval)
+                                    NotificationController().makeSupplyNotification(interval: supplyInterval, labelTime: supplyInterval)
                                 }
                                 break
                             }
@@ -142,13 +142,19 @@ struct ContentView: View {
                                 if restAlertFlag {
                                     NotificationController().removeRestNotification()
                                 }
+                                if endOfRestAlertFlag {
+                                    NotificationController().makeEndOfRestNotification(interval: restTime, labelTime: restTime)
+                                }
                                 stopTimer()
                                 startTimer()
                                 break
                             case .takingBreak:
                                 print("rest -> working")
                                 if restAlertFlag {
-                                    NotificationController().makeRestNotification(interval: restInterval)
+                                    NotificationController().makeRestNotification(interval: restInterval, labelTime: restInterval)
+                                }
+                                if endOfRestAlertFlag {
+                                    NotificationController().removeEndOfRestNotification()
                                 }
                                 stopTimer()
                                 startTimer()
@@ -212,9 +218,12 @@ struct ContentView: View {
                         SettingView(
                             restAlertFlag: $restAlertFlag,
                             supplyAlertFlag: $supplyAlertFlag,
+                            endOfRestAlertFlag: $endOfRestAlertFlag,
                             restInterval: $restInterval,
                             restTime: $restTime,
-                            supplyInterval: $supplyInterval
+                            supplyInterval: $supplyInterval,
+                            currentTime: $currentTime,
+                            statusController: $statusController
                         )
                     }
                 }
