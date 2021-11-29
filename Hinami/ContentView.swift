@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 import CoreData
 
 /**
@@ -99,9 +100,15 @@ struct ContentView: View {
                     VStack() {
                         
                         Button(action: {
-                            print(geometry.frame(in:.local).origin
-                            )
-                            print("w:\(geometry.frame(in:.local).width), h:\(geometry.frame(in:.local).height)")
+                            UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound]){
+                                (granted, _) in
+                                if granted {
+                                    //通知が許可されているときの処理
+                                    makeNotification()
+                                }else {
+                                    //通知が拒否されているときの処理
+                                }
+                            }
                             statusController.changeState(buttonNum: 0)
                             let beforeStatus = statusController.getBeforeStatusType()
                             switch beforeStatus {
@@ -266,6 +273,10 @@ struct ContentView: View {
      */
     private func stopTimer() {
         timerHandler?.invalidate()
+        let state = statusController.getStatusType()
+        if state == .offDuty {
+            currentTime.resetTime()
+        }
     }
     
     /**
@@ -284,6 +295,21 @@ struct ContentView: View {
             m: ((diff.second ?? 0)/60%60),
             s: ((diff.second ?? 0)%60)
         )
+    }
+    
+    func makeNotification(){
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Hinami"
+        content.subtitle = "作業開始から\(restInterval)分経過"
+        content.body = "そろそろ休憩をとりませんか？"
+        content.sound = UNNotificationSound.default
+        
+        let request = UNNotificationRequest(identifier: timerStartDate, content: content, trigger: trigger)
+        print(request)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 }
 
