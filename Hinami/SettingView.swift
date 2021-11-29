@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct SettingView: View {
     @Environment(\.presentationMode) var presentationMode
