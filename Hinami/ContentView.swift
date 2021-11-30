@@ -6,15 +6,24 @@
 //
 
 import SwiftUI
+import UserNotifications
 import CoreData
 
 /**
  時間の情報を管理するための構造体
  */
-private struct TimeStruct {
+struct TimeStruct {
     private var h = 0
     private var m = 0
     private var s = 0
+    
+    init() {}
+    
+    init(h:Int,m:Int,s:Int) {
+        self.h = h
+        self.m = m
+        self.s = s
+    }
     
     /**
      引数で渡した値を時刻情報のプロパティとしてセットする関数
@@ -72,6 +81,7 @@ struct ContentView: View {
     @State private var isSettigViewActive = false
     
     @AppStorage("restAlertFlag") private var restAlertFlag = false
+    @AppStorage("endOfRestAlertFlag") private var endOfRestAlertFlag = false
     @AppStorage("supplyAlertFlag") private var supplyAlertFlag = false
     @AppStorage("restInterval") private var restInterval = 45
     @AppStorage("restTime") private var restTime = 15
@@ -83,8 +93,14 @@ struct ContentView: View {
     @State private var timerHandler: Timer?
     
     @State private var timerStartDate = ""
+    @State private var timerStopDate = ""
     @State private var workTimerStartDate = ""
-    private let dateController = DateController()
+    
+    init() {
+        
+        print("first view init")
+        
+    }
     
     var body: some View {
         NavigationView {
@@ -99,16 +115,24 @@ struct ContentView: View {
                     VStack() {
                         
                         Button(action: {
-                            print(geometry.frame(in:.local).origin
-                            )
-                            print("w:\(geometry.frame(in:.local).width), h:\(geometry.frame(in:.local).height)")
                             statusController.changeState(buttonNum: 0)
                             let beforeStatus = statusController.getBeforeStatusType()
                             switch beforeStatus {
                             case .offDuty:
+                                print("off -> working")
                                 startTimer()
+                                if restAlertFlag {
+                                    NotificationController().makeRestNotification(interval: restInterval, labelTime: restInterval)
+                                }
+                                if supplyAlertFlag {
+                                    NotificationController().makeSupplyNotification(interval: supplyInterval, labelTime: supplyInterval)
+                                }
                                 break
                             default:
+                                print("working/rest -> water")
+                                if supplyAlertFlag {
+                                    NotificationController().makeSupplyNotification(interval: supplyInterval, labelTime: supplyInterval)
+                                }
                                 break
                             }
                         }){
@@ -129,10 +153,24 @@ struct ContentView: View {
                             let beforeStatus = statusController.getBeforeStatusType()
                             switch beforeStatus {
                             case .working:
+                                print("working -> rest")
+                                if restAlertFlag {
+                                    NotificationController().removeRestNotification()
+                                }
+                                if endOfRestAlertFlag {
+                                    NotificationController().makeEndOfRestNotification(interval: restTime, labelTime: restTime)
+                                }
                                 stopTimer()
                                 startTimer()
                                 break
                             case .takingBreak:
+                                print("rest -> working")
+                                if restAlertFlag {
+                                    NotificationController().makeRestNotification(interval: restInterval, labelTime: restInterval)
+                                }
+                                if endOfRestAlertFlag {
+                                    NotificationController().removeEndOfRestNotification()
+                                }
                                 stopTimer()
                                 startTimer()
                             default:
@@ -158,6 +196,13 @@ struct ContentView: View {
                             let beforeStatus = statusController.getBeforeStatusType()
                             switch beforeStatus {
                             case .working:
+                                print("working -> off")
+                                if restAlertFlag {
+                                    NotificationController().removeRestNotification()
+                                }
+                                if supplyAlertFlag {
+                                    NotificationController().removeSupplyNotification()
+                                }
                                 stopTimer()
                                 break
                             default:
@@ -181,22 +226,86 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button(action: {
+                        stopTimer()
                         self.isSettigViewActive.toggle()
                     }){
                         Image("settingIcon")
-                    }.sheet(isPresented: $isSettigViewActive) {
+                    }.sheet(isPresented: $isSettigViewActive, onDismiss: didDismiss) {
                         SettingView(
                             restAlertFlag: $restAlertFlag,
                             supplyAlertFlag: $supplyAlertFlag,
+                            endOfRestAlertFlag: $endOfRestAlertFlag,
                             restInterval: $restInterval,
                             restTime: $restTime,
-                            supplyInterval: $supplyInterval
+                            supplyInterval: $supplyInterval,
+                            statusController: $statusController,
+                            accumulatedTime: currentTime
                         )
                     }
                 }
             }
         }
     }
+    
+    func didDismiss() {
+        let status = statusController.getStatusType()
+        print("didDismiss: \(status)")
+        switch status {
+        case .working:
+            reStartTimer()
+            break
+        case .takingBreak:
+            reStartTimer()
+            break
+        case .offDuty:
+            return
+        }
+        
+    }
+    
+    func reStartTimer() {
+        if timerStopDate == "" {
+            print("timerStopDate is empty")
+            return
+        }
+        
+        if timerStartDate == "" {
+            print("timerStartDate is empty")
+            return
+        }
+        
+        if let unwrapedTimerHandler = timerHandler {
+            if unwrapedTimerHandler.isValid {
+                print("timer is invalidate")
+                return
+            }
+        }
+        
+        let stop = DateController().dateFromString(string: timerStopDate, format: "yyyy/MM/dd HH:mm:ss")
+        let cal = Calendar(identifier: .gregorian)
+        let diff = cal.dateComponents([.second], from: stop, to: Date())
+        var startDate = DateController().dateFromString(string: timerStartDate, format: "yyyy/MM/dd HH:mm:ss")
+        startDate = cal.date(
+            byAdding: .hour,
+            value: ((diff.second ?? 0)/3600),
+            to: startDate)!
+        startDate = cal.date(
+            byAdding: .minute,
+            value: ((diff.second ?? 0)/60%60),
+            to: startDate)!
+        startDate = cal.date(
+            byAdding: .second,
+            value: ((diff.second ?? 0)%60),
+            to: startDate)!
+        timerStartDate = DateController().stringFromDate(date: startDate, format: "yyyy/MM/dd HH:mm:ss")
+        currentTime.resetTime()
+        countTime()
+        
+        timerHandler = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            countTime()
+        }
+    }
+    
     
     /**
      タイマー開始関数
@@ -220,7 +329,7 @@ struct ContentView: View {
                 print("off -> working")
                 workTime.resetTime()
                 currentTime.resetTime()
-                timerStartDate = dateController.stringFromDate(date: Date(), format: "yyyy/MM/dd HH:mm:ss")
+                timerStartDate = DateController().stringFromDate(date: Date(), format: "yyyy/MM/dd HH:mm:ss")
             } else {
                 print("rest -> working")
                 let cal = Calendar(identifier: .gregorian)
@@ -237,7 +346,7 @@ struct ContentView: View {
                     byAdding: .second,
                     value: -workTime.getS(),
                     to: dateTmp)!
-                timerStartDate = dateController.stringFromDate(date: dateTmp, format: "yyyy/MM/dd HH:mm:ss")
+                timerStartDate = DateController().stringFromDate(date: dateTmp, format: "yyyy/MM/dd HH:mm:ss")
                 currentTime.resetTime()
                 countTime()
             }
@@ -246,13 +355,12 @@ struct ContentView: View {
             workTime = currentTime
             currentTime.resetTime()
             workTimerStartDate = timerStartDate
-            timerStartDate = dateController.stringFromDate(date: Date(), format: "yyyy/MM/dd HH:mm:ss")
+            timerStartDate = DateController().stringFromDate(date: Date(), format: "yyyy/MM/dd HH:mm:ss")
             print(".takingBreak")
             break
         default:
             break
         }
-        print(timerStartDate)
         
         timerHandler = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             //            currentTime.countUpTime()
@@ -265,7 +373,12 @@ struct ContentView: View {
      タイマー停止関数
      */
     private func stopTimer() {
+        timerStopDate = DateController().stringFromDate(date: Date(), format: "yyyy/MM/dd HH:mm:ss")
         timerHandler?.invalidate()
+        let state = statusController.getStatusType()
+        if state == .offDuty {
+            currentTime.resetTime()
+        }
     }
     
     /**
@@ -274,7 +387,7 @@ struct ContentView: View {
      バックグラウンド時の時間も計測するため、Date型の差分を取る
      */
     private func countTime(){
-        let start = dateController.dateFromString(string: timerStartDate, format: "yyyy/MM/dd HH:mm:ss")
+        let start = DateController().dateFromString(string: timerStartDate, format: "yyyy/MM/dd HH:mm:ss")
         let now = Date()
         let cal = Calendar(identifier: .gregorian)
         let diff = cal.dateComponents([.second], from: start, to: now)
