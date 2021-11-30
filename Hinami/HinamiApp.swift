@@ -38,6 +38,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
+        NotificationController().removeRestNotification()
+        NotificationController().removeEndOfRestNotification()
+        NotificationController().removeSupplyNotification()
         print("フリックしてアプリを終了させた時に呼ばれる")
     }
 }
