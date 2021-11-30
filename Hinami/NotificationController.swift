@@ -13,7 +13,7 @@ struct NotificationController {
         
         if isNotificationPermission() {
             //通知が許可されているときの処理
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(interval), repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(interval*60), repeats: false)
             
             let content = UNMutableNotificationContent()
             content.title = "Hinami"
@@ -37,7 +37,7 @@ struct NotificationController {
         
         if isNotificationPermission() {
             //通知が許可されているときの処理
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(interval), repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(interval*60), repeats: false)
             
             let content = UNMutableNotificationContent()
             content.title = "Hinami"
@@ -61,7 +61,7 @@ struct NotificationController {
         
         if isNotificationPermission() {
             //通知が許可されているときの処理
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(interval), repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(interval*60), repeats: false)
             
             let content = UNMutableNotificationContent()
             content.title = "Hinami"
