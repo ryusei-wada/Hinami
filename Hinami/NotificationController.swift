@@ -22,7 +22,6 @@ struct NotificationController {
             content.sound = UNNotificationSound.default
             
             let request = UNNotificationRequest(identifier: "rest", content: content, trigger: trigger)
-            print(request)
             
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         }else {
@@ -47,7 +46,6 @@ struct NotificationController {
             content.sound = UNNotificationSound.default
             
             let request = UNNotificationRequest(identifier: "supply", content: content, trigger: trigger)
-            print(request)
             
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         }else {
@@ -72,7 +70,6 @@ struct NotificationController {
             content.sound = UNNotificationSound.default
             
             let request = UNNotificationRequest(identifier: "end-of-rest", content: content, trigger: trigger)
-            print(request)
             
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         }else {
@@ -98,7 +95,6 @@ struct NotificationController {
         }
         
         while ret == nil {}
-        print("notification permission: \(ret!)")
         return ret!
     }
 }

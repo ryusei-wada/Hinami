@@ -9,23 +9,24 @@ import SwiftUI
 import UserNotifications
 
 class Flags: ObservableObject {
+    
     var showAlert = false
     @Published var rFlag = false {
         didSet {
             showAlert = (!NotificationController().isNotificationPermission() && (sFlag || rFlag || eFlag))
-            print(showAlert)
+            print("set rFlag!:\(rFlag)")
         }
     }
     @Published var eFlag = false {
         didSet {
             showAlert = (!NotificationController().isNotificationPermission() && (sFlag || rFlag || eFlag))
-            print(showAlert)
+            print("set eFlag!:\(eFlag)")
         }
     }
     @Published var sFlag = false{
         didSet {
             showAlert = (!NotificationController().isNotificationPermission() && (sFlag || rFlag || eFlag))
-            print(showAlert)
+            print("set sFlag!:\(sFlag)")
         }
     }
 }
@@ -39,8 +40,11 @@ struct SettingView: View {
     @Binding var restInterval: Int
     @Binding var restTime: Int
     @Binding var supplyInterval: Int
-    @Binding var currentTime: TimeStruct
     @Binding var statusController: StatusController
+    
+    var accumulatedTime: TimeStruct
+    
+    let openSettingTime = Date()
     
     @State var rIntervalTmp = 0
     @State var rTimeTmp = 0
@@ -166,7 +170,9 @@ struct SettingView: View {
                 
                 Section{
                     Button(action:{
-                        let currentTimeVal = (currentTime.getH()*60*60)+(currentTime.getM()*60)+(currentTime.getS())
+                        let diff = Calendar(identifier: .gregorian).dateComponents([.second], from: openSettingTime, to: Date())
+                        let currentTimeVal = (accumulatedTime.getH()*60*60)+(accumulatedTime.getM()*60)+(accumulatedTime.getS())
+                        + (diff.second ?? 0)
                         
                         let status = statusController.getStatusType()
                         switch status {
@@ -175,24 +181,44 @@ struct SettingView: View {
                                 if currentTimeVal < rTimeTmp {
                                     NotificationController().makeEndOfRestNotification(interval: rTimeTmp-currentTimeVal,  labelTime: rTimeTmp)
                                 }
+                            } else {
+                                NotificationController().removeEndOfRestNotification()
                             }
+                            
                             if flags.sFlag {
                                 if currentTimeVal < sIntervalTmp {
                                     NotificationController().makeSupplyNotification(interval: sIntervalTmp-currentTimeVal, labelTime: sIntervalTmp)
                                 }
+                            }else {
+                                NotificationController().removeSupplyNotification()
                             }
+                            
+                            if !flags.rFlag {
+                                NotificationController().removeRestNotification()
+                            }
+                            
                             break
                         case .working:
                             if flags.rFlag {
                                 if currentTimeVal < rIntervalTmp {
                                     NotificationController().makeRestNotification(interval: rIntervalTmp-currentTimeVal, labelTime: rIntervalTmp)
                                 }
+                            } else {
+                                NotificationController().removeRestNotification()
                             }
+                            
                             if flags.sFlag {
                                 if currentTimeVal < sIntervalTmp {
                                     NotificationController().makeSupplyNotification(interval: sIntervalTmp-currentTimeVal, labelTime: sIntervalTmp)
                                 }
+                            } else {
+                                NotificationController().removeSupplyNotification()
                             }
+                            
+                            if !flags.eFlag {
+                                NotificationController().removeEndOfRestNotification()
+                            }
+                            
                             break
                         default:
                             break
@@ -220,9 +246,7 @@ struct SettingView: View {
             rTimeTmp = restTime
             sIntervalTmp = supplyInterval
         }
-        .onDisappear {
-            
-        }
+        
     }
 }
 
@@ -235,8 +259,8 @@ struct SettingView_Previews: PreviewProvider {
             restInterval: .constant(45),
             restTime: .constant(15),
             supplyInterval: .constant(60),
-            currentTime: .constant(TimeStruct()),
-            statusController: .constant(StatusController(status: .offDuty))
+            statusController: .constant(StatusController(status: .offDuty)),
+            accumulatedTime: TimeStruct()
         )
     }
 }
