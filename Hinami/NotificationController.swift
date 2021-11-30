@@ -89,4 +89,24 @@ struct NotificationController {
     func removeEndOfRestNotification() {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["end-of-rest"])
     }
+    
+    func isAuthorizatedRequest() -> Bool {
+        var ret:Bool?
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound]){
+            (granted, _) in
+            if granted {
+                //通知が許可されているときの処理
+                print("fuga")
+                ret = true
+            }else {
+                print("piyo")
+                ret = false
+            }
+        }
+        
+        while ret == nil {}
+        
+        return ret!
+    }
 }

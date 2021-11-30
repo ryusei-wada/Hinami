@@ -8,6 +8,28 @@
 import SwiftUI
 import UserNotifications
 
+class Flags: ObservableObject {
+    var showAlert = false
+    @Published var rFlag = false {
+        didSet {
+            showAlert = (!NotificationController().isAuthorizatedRequest() && (sFlag || rFlag || eFlag))
+            print(showAlert)
+        }
+    }
+    @Published var eFlag = false {
+        didSet {
+            showAlert = (!NotificationController().isAuthorizatedRequest() && (sFlag || rFlag || eFlag))
+            print(showAlert)
+        }
+    }
+    @Published var sFlag = false{
+        didSet {
+            showAlert = (!NotificationController().isAuthorizatedRequest() && (sFlag || rFlag || eFlag))
+            print(showAlert)
+        }
+    }
+}
+
 struct SettingView: View {
     @Environment(\.presentationMode) var presentationMode
     
@@ -20,16 +42,31 @@ struct SettingView: View {
     @Binding var currentTime: TimeStruct
     @Binding var statusController: StatusController
     
+    @State var rIntervalTmp = 0
+    @State var rTimeTmp = 0
+    @State var sIntervalTmp = 0
+    
+    @ObservedObject var flags = Flags()
+    
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    Toggle(isOn: $restAlertFlag) {
+                    Toggle(isOn: $flags.rFlag) {
                         Text("休憩通知")
                     }
+                    .alert("通知が許可されていません", isPresented: $flags.showAlert) {
+                        Button("OK") {
+                            flags.rFlag = false
+                            flags.sFlag = false
+                            flags.eFlag = false
+                        }
+                    } message: {
+                        Text("「設定>Hinami>通知」から通知を許可してください")
+                    }
                     
-                    if (restAlertFlag) {
-                        Picker(selection: $restInterval) {
+                    if (flags.rFlag) {
+                        Picker(selection: $rIntervalTmp) {
                             Text("10 min")
                                 .tag(10)
                             Text("20 min")
@@ -53,12 +90,21 @@ struct SettingView: View {
                 }
                 
                 Section {
-                    Toggle(isOn: $endOfRestAlertFlag) {
+                    Toggle(isOn: $flags.eFlag) {
                         Text("休憩終了通知")
                     }
+                    .alert("通知が許可されていません", isPresented: $flags.showAlert) {
+                        Button("OK") {
+                            flags.rFlag = false
+                            flags.sFlag = false
+                            flags.eFlag = false
+                        }
+                    } message: {
+                        Text("「設定>Hinami>通知」から通知を許可してください")
+                    }
                     
-                    if (endOfRestAlertFlag) {
-                        Picker(selection: $restTime) {
+                    if (flags.eFlag) {
+                        Picker(selection: $rTimeTmp) {
                             Text("5 min")
                                 .tag(5)
                             Text("10 min")
@@ -85,12 +131,21 @@ struct SettingView: View {
                 }
                 
                 Section {
-                    Toggle(isOn: $supplyAlertFlag) {
+                    Toggle(isOn: $flags.sFlag) {
                         Text("給水通知")
                     }
+                    .alert("通知が許可されていません", isPresented: $flags.showAlert) {
+                        Button("OK") {
+                            flags.rFlag = false
+                            flags.sFlag = false
+                            flags.eFlag = false
+                        }
+                    } message: {
+                        Text("「設定>Hinami>通知」から通知を許可してください")
+                    }
                     
-                    if (supplyAlertFlag) {
-                        Picker(selection: $supplyInterval) {
+                    if (flags.sFlag) {
+                        Picker(selection: $sIntervalTmp) {
                             Text("30 min")
                                 .tag(30)
                             Text("45 min")
@@ -116,33 +171,38 @@ struct SettingView: View {
                         let status = statusController.getStatusType()
                         switch status {
                         case .takingBreak:
-                            if endOfRestAlertFlag {
-                                if currentTimeVal < restTime {
-                                    NotificationController().makeEndOfRestNotification(interval: restTime-currentTimeVal,  labelTime: restTime)
+                            if flags.eFlag {
+                                if currentTimeVal < rTimeTmp {
+                                    NotificationController().makeEndOfRestNotification(interval: rTimeTmp-currentTimeVal,  labelTime: rTimeTmp)
                                 }
                             }
-                            if supplyAlertFlag {
-                                if currentTimeVal < supplyInterval {
-                                    NotificationController().makeSupplyNotification(interval: supplyInterval-currentTimeVal, labelTime: supplyInterval)
+                            if flags.sFlag {
+                                if currentTimeVal < sIntervalTmp {
+                                    NotificationController().makeSupplyNotification(interval: sIntervalTmp-currentTimeVal, labelTime: sIntervalTmp)
                                 }
                             }
                             break
                         case .working:
-                            if restAlertFlag {
-                                if currentTimeVal < restInterval {
-                                    NotificationController().makeRestNotification(interval: restInterval-currentTimeVal, labelTime: restInterval)
+                            if flags.rFlag {
+                                if currentTimeVal < rIntervalTmp {
+                                    NotificationController().makeRestNotification(interval: rIntervalTmp-currentTimeVal, labelTime: rIntervalTmp)
                                 }
                             }
-                            if supplyAlertFlag {
-                                if currentTimeVal < supplyInterval {
-                                    NotificationController().makeSupplyNotification(interval: supplyInterval-currentTimeVal, labelTime: supplyInterval)
+                            if flags.sFlag {
+                                if currentTimeVal < sIntervalTmp {
+                                    NotificationController().makeSupplyNotification(interval: sIntervalTmp-currentTimeVal, labelTime: sIntervalTmp)
                                 }
                             }
                             break
                         default:
                             break
                         }
-                        
+                        restAlertFlag = flags.rFlag
+                        endOfRestAlertFlag = flags.eFlag
+                        supplyAlertFlag = flags.sFlag
+                        restInterval = rIntervalTmp
+                        restTime = rTimeTmp
+                        supplyInterval = sIntervalTmp
                         self.presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("確定")
@@ -150,6 +210,18 @@ struct SettingView: View {
                 }
             }
             .navigationTitle("Setting")
+            
+        }
+        .onAppear {
+            flags.sFlag = supplyAlertFlag
+            flags.eFlag = endOfRestAlertFlag
+            flags.rFlag = restAlertFlag
+            rIntervalTmp = restInterval
+            rTimeTmp = restTime
+            sIntervalTmp = supplyInterval
+        }
+        .onDisappear {
+            
         }
     }
 }
