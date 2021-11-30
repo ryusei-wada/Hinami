@@ -12,19 +12,19 @@ class Flags: ObservableObject {
     var showAlert = false
     @Published var rFlag = false {
         didSet {
-            showAlert = (!NotificationController().isAuthorizatedRequest() && (sFlag || rFlag || eFlag))
+            showAlert = (!NotificationController().isNotificationPermission() && (sFlag || rFlag || eFlag))
             print(showAlert)
         }
     }
     @Published var eFlag = false {
         didSet {
-            showAlert = (!NotificationController().isAuthorizatedRequest() && (sFlag || rFlag || eFlag))
+            showAlert = (!NotificationController().isNotificationPermission() && (sFlag || rFlag || eFlag))
             print(showAlert)
         }
     }
     @Published var sFlag = false{
         didSet {
-            showAlert = (!NotificationController().isAuthorizatedRequest() && (sFlag || rFlag || eFlag))
+            showAlert = (!NotificationController().isNotificationPermission() && (sFlag || rFlag || eFlag))
             print(showAlert)
         }
     }
