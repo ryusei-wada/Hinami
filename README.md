@@ -1,5 +1,5 @@
 # hinami - 仕事や勉強をサポートするアプリ
-![hinami](https://user-images.githubusercontent.com/95224206/144337760-4bafa87b-e274-4cd3-830d-7ed13e5324f3.png)
+![hinami](https://user-images.githubusercontent.com/95224206/144338538-272704c6-fbe6-4aa7-bd7f-436cd46df25d.png)
 
 hinami (ひなみ) は、在宅ワークや自宅での勉強などの作業をサポートするアプリです。アプリ上で作業時間や休憩時間を計測し、モチベーションの維持を手助けします。また、休憩や水分補給、作業再開のタイミングを通知でお知らせし、適切な作業ルーティンを保ちます。
 
